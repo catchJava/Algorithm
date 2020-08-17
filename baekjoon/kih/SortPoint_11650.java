@@ -43,11 +43,11 @@ public class SortPoint_11650 {
 
     Collections.sort(pointList, new Comparator<Point11650>() {
       @Override
-      public int compare(Point11650 o1, Point11650 o2) {
-        if (o1.x > o2.x) {
+      public int compare(Point11650 p1, Point11650 p2) {
+        if (p1.x > p2.x) {
           return 1;
-        } else if (o1.x == o2.x) {
-          if (o1.y > o2.y) {
+        } else if (p1.x == p2.x) {
+          if (p1.y > p2.y) {
             return 1;
           } else {
             return -1;
