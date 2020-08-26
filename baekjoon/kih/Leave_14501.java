@@ -35,7 +35,10 @@ public class Leave_14501 {
     private static void solution(int day, int sum) {
 
         if (day > n + 1) return;
-        if (day == n + 1)  answer = Math.max(answer, sum);
+        if (day == n + 1) {
+            answer = Math.max(answer, sum);
+            return;
+        }
 
         // day 날짜에 상담 했을 경우
         solution(day + t[day], sum + p[day]);
