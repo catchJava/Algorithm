@@ -27,14 +27,6 @@ public class Leave_14501 {
             p[i] = Integer.parseInt(st.nextToken());
         }
 
-        /*
-         * d[n] : n일 까지 상담했을 때 최대 수익
-         * case 1) : n일에 상담 했을 경우
-         *          d[n] = p[n] + d[n-1]
-         * case 2) : n일에 상담하지 않았을 경우
-         *          d[n] = d[n-1]
-         */
-
         solution(1, 0);
 
         System.out.println(answer);
