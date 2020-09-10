@@ -41,11 +41,6 @@ public class Cabbage_1012 {
             n = Integer.parseInt(inputData[1]); // 배추밭 세로 길이
             k = Integer.parseInt(inputData[2]); // 배추가 심어져 있는 위치의 갯수
 
-            if (k == 1) {
-                System.out.println(1); // 배추가 하나만 심어져 있으면 지렁이 갯수는 1
-                continue;
-            }
-
             cabbageField = new int[n][m]; // 배추밭 크기 정의
 
             for (int i = 0; i < k; i++) {
@@ -72,6 +67,11 @@ public class Cabbage_1012 {
             }
 
             System.out.println(answer);
+
+            /*
+             * 메모리 : 15016 KB
+             *  시간 : 128ms
+             */
         }
     }
 
@@ -86,10 +86,10 @@ public class Cabbage_1012 {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                if (nx > 0 && nx < n && ny > 0 && ny < m) { // 배추밭 범위 내에서
+                if (nx >= 0 && nx < n && ny >= 0 && ny < m) { // 배추밭 범위 내에서
                     if (cabbageField[nx][ny] == 0) continue; // 배추가 없다면 다른 방향으로
-                    queue.add(new CabbagePoint(nx, ny));
                     cabbageField[nx][ny] = 0;
+                    queue.add(new CabbagePoint(nx, ny));
                 }
             }
         }
