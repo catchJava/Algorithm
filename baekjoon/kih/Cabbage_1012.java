@@ -53,16 +53,17 @@ public class Cabbage_1012 {
                 int x = Integer.parseInt(st.nextToken());
                 int y = Integer.parseInt(st.nextToken());
 
-                cabbageField[x][y] = 1; // 배추가 심어져 있는 좌표에 1을 입력한다.
+                cabbageField[y][x] = 1; // 배추가 심어져 있는 좌표에 1을 입력한다.
             }
 
             Queue<CabbagePoint> queue = new LinkedList<>(); // bfs를 위한 큐
             int answer = 0;
 
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
 
                     if (cabbageField[i][j] == 1) {
+                        cabbageField[i][j] = 0;
                         answer += 1;
                         queue.add(new CabbagePoint(i, j)); // 배추의 좌표를 큐에 삽입한다.
                         bfs(queue, cabbageField);
@@ -85,11 +86,11 @@ public class Cabbage_1012 {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                if (nx < 0 || nx > n || ny < 0 || ny > m) continue; // 배추밭을 벗어난다면 다른 방향으로
-                if (cabbageField[nx][ny] == 0) continue; // 배추가 없다면 다른 방향으로
-
-                queue.add(new CabbagePoint(nx, ny));
-                cabbageField[nx][ny] = 0;
+                if (nx > 0 && nx < n && ny > 0 && ny < m) { // 배추밭 범위 내에서
+                    if (cabbageField[nx][ny] == 0) continue; // 배추가 없다면 다른 방향으로
+                    queue.add(new CabbagePoint(nx, ny));
+                    cabbageField[nx][ny] = 0;
+                }
             }
         }
     }
