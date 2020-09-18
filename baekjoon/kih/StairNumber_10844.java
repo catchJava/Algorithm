@@ -13,16 +13,22 @@ public class StairNumber_10844 {
 
         int n = Integer.parseInt(br.readLine());
 
-        int[][] d = new int[n + 1][10];
+
+        /*
+         * d[i][j] : 자릿수가 i 이면서 숫자의 맨 앞자리가 j 인 계단수의 갯수
+         * ex ) d[3][2] : 201, 210, 212, 232, 234
+         */
+
+        long[][] d = new long[n + 1][10];
 
         for (int i = 1; i <= 9; i++) {
             d[1][i] = 1;
         }
 
         for (int i = 2; i <= n; i++) {
-            for (int j = 1; j <= 9; j++) {
-                if (j == 1) {
-                    d[i][j] = (d[i - 1][j + 1] + 1) % VALUE;
+            for (int j = 0; j <= 9; j++) {
+                if (j == 0) {
+                    d[i][j] = (d[i - 1][j + 1]) % VALUE;
                 } else if (j == 9) {
                     d[i][j] = d[i - 1][j - 1] % VALUE;
                 } else {
@@ -32,12 +38,12 @@ public class StairNumber_10844 {
         }
 
 
-        int answer = 0;
+        long answer = 0;
 
         for (int i = 0; i <= 9; i++) {
-            answer += d[n][i] % VALUE;
+            answer += d[n][i];
         }
 
-        System.out.println(answer);
+        System.out.println(answer % VALUE);
     }
 }
