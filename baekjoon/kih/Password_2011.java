@@ -20,26 +20,38 @@ public class Password_2011 {
 
         int len = password.length();
 
-        if (len == 1) {
+        if (len == 1 && Integer.parseInt(password) != 0) { // 0이 아닌 한자리 암호라면
             return 1;
+        } else if (password.charAt(0) - '0' == 0) { // 암호의 시작이 0이라면
+            return 0;
         }
 
-        long[][] d = new long[len][2];
-        d[0][0] = 0; // 쪼개졌을 때 ex) 1.1
-        d[0][1] = 1; // 붙어있을 때 ex) 11
+        long[] d = new long[len + 1];
+        d[0] = 1;
+        d[1] = 1;
 
-        for (int i = 1; i < len; i++) {
+        for (int i = 2; i <= len; i++) {
 
-            int pre_num = password.charAt(i - 1) - '0';
-            int cur_num = password.charAt(i) - '0';
+            int pre_num = password.charAt(i - 2) - '0';
+            int cur_num = password.charAt(i - 1) - '0';
 
-            if ((pre_num * 10) + cur_num > 26) {
-                // d[i] = d[i - 1] % MOD;
-            } else {
-                // d[i] = (d[i - 1] + 1) % MOD;
+            if (cur_num != 0) {
+                d[i] += d[i - 1] % MOD;
             }
+
+            int num = (pre_num * 10) + cur_num;
+
+            if (num >= 10 && num <= 26) {
+                d[i] += d[i - 2] % MOD;
+            } else if (num > 26 && cur_num == 0) {
+                return 0;
+            } else if (num == 0) {
+                return 0;
+            }
+
+            d[i] %= MOD;
         }
 
-        return d[len - 1][0] + d[len - 1][2];
+        return d[len];
     }
 }
